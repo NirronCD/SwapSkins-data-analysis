@@ -1,0 +1,93 @@
+Linhas confiáveis: 363,734 de 367,844 (4,110 descartadas por baixa confiabilidade)
+Faltantes em ref_skin_log_preco: 0.00%
+Treino: 203,301 | Validação: 42,705 | Teste: 117,728
+[val] A Ridge (linear)         {'alpha': 0.1} -> MdAPE 58.1% R2 0.745 (1s)
+[val] A Ridge (linear)         {'alpha': 1.0} -> MdAPE 58.1% R2 0.745 (1s)
+[val] A Ridge (linear)         {'alpha': 10.0} -> MdAPE 58.1% R2 0.745 (1s)
+[val] A Random Forest          {'min_samples_leaf': 2} -> MdAPE 32.6% R2 0.904 (9s)
+[val] A Random Forest          {'min_samples_leaf': 10} -> MdAPE 40.6% R2 0.872 (8s)
+[val] A HistGradientBoosting   {'learning_rate': 0.05, 'max_leaf_nodes': 31} -> MdAPE 38.4% R2 0.892 (5s)
+[val] A HistGradientBoosting   {'learning_rate': 0.05, 'max_leaf_nodes': 127} -> MdAPE 31.7% R2 0.915 (11s)
+[val] A HistGradientBoosting   {'learning_rate': 0.1, 'max_leaf_nodes': 31} -> MdAPE 33.4% R2 0.911 (5s)
+[val] A HistGradientBoosting   {'learning_rate': 0.1, 'max_leaf_nodes': 127} -> MdAPE 29.1% R2 0.921 (9s)
+[val] B Ridge (linear)         {'alpha': 0.1} -> MdAPE 21.4% R2 0.975 (1s)
+[val] B Ridge (linear)         {'alpha': 1.0} -> MdAPE 21.4% R2 0.975 (1s)
+[val] B Ridge (linear)         {'alpha': 10.0} -> MdAPE 21.4% R2 0.975 (1s)
+[val] B Random Forest          {'min_samples_leaf': 2} -> MdAPE 14.1% R2 0.986 (14s)
+[val] B Random Forest          {'min_samples_leaf': 10} -> MdAPE 16.0% R2 0.983 (11s)
+[val] B HistGradientBoosting   {'learning_rate': 0.05, 'max_leaf_nodes': 31} -> MdAPE 13.3% R2 0.988 (6s)
+[val] B HistGradientBoosting   {'learning_rate': 0.05, 'max_leaf_nodes': 127} -> MdAPE 11.6% R2 0.990 (13s)
+[val] B HistGradientBoosting   {'learning_rate': 0.1, 'max_leaf_nodes': 31} -> MdAPE 12.3% R2 0.989 (6s)
+[val] B HistGradientBoosting   {'learning_rate': 0.1, 'max_leaf_nodes': 127} -> MdAPE 11.1% R2 0.991 (11s)
+[teste] A Dummy (média)          MdAPE 93.5% R2 -0.035
+[teste] A Ridge (linear)         MdAPE 76.0% R2 0.712
+[teste] A Random Forest          MdAPE 59.9% R2 0.794
+[teste] A HistGradientBoosting   MdAPE 66.1% R2 0.808
+[teste] B Dummy (média)          MdAPE 93.5% R2 -0.035
+[teste] B Ridge (linear)         MdAPE 25.0% R2 0.961
+[teste] B Random Forest          MdAPE 17.9% R2 0.973
+[teste] B HistGradientBoosting   MdAPE 15.6% R2 0.977
+
+                          conjunto                              modelo  R2 (log)  MAE (US$)  MdAPE (%)  MAPE (%)  dentro ±10% (%)  dentro ±25% (%)
+                                - Baseline (mediana arma+desgaste+ST)     0.345     24.839     79.681   167.617            4.907           12.369
+                  A: só atributos                       Dummy (média)    -0.035     27.879     93.532   299.649            3.561            9.127
+                  A: só atributos                      Ridge (linear)     0.712     21.938     75.957   169.184            6.595           16.537
+                  A: só atributos                       Random Forest     0.794     14.015     59.930   132.818           10.331           24.444
+                  A: só atributos                HistGradientBoosting     0.808     16.233     66.135   124.164            8.980           21.873
+B: atributos + referência da skin                       Dummy (média)    -0.035     27.879     93.532   299.649            3.561            9.127
+B: atributos + referência da skin                      Ridge (linear)     0.961     12.987     24.995    33.270           21.429           50.010
+B: atributos + referência da skin                       Random Forest     0.973      8.062     17.916    25.214           30.424           63.439
+B: atributos + referência da skin                HistGradientBoosting     0.977      9.402     15.623    23.038           34.505           68.078
+
+Modelo escolhido: HistGradientBoosting (B: atributos + referência da skin) | hiperparâmetros: {'learning_rate': 0.1, 'max_leaf_nodes': 127}
+
+Erro por faixa de preço:
+                n  MdAPE  dentro_25
+faixa                             
+< US$1     36708   16.7       65.8
+US$1-10    44925   14.2       72.1
+US$10-100  27804   14.8       69.9
+> US$100    8291   24.7       50.5
+
+MdAPE por ano do teste:
+ mes
+2024    11.1
+2025    16.3
+2026    30.6
+
+Faixa de 95% dos preços reais: 0.54x a 1.99x o preço justo
+  salvo: output\modelo\01_comparacao_modelos.png
+  salvo: output\modelo\02_real_vs_previsto.png
+  salvo: output\modelo\03_distribuicao_erro.png
+  salvo: output\modelo\04_erro_por_faixa.png
+  salvo: output\modelo\05_importancia_variaveis.png
+[drift] 2024: fixo MdAPE 11.1% | re-treino 11.1%
+[drift] 2025: fixo MdAPE 16.3% | re-treino 12.9%
+[drift] 2026: fixo MdAPE 30.6% | re-treino 17.1%
+  salvo: output\modelo\06_deriva_retreino.png
+
+Resumo: {
+  "modelo_escolhido": "HistGradientBoosting",
+  "conjunto": "B: atributos + referência da skin",
+  "hiperparametros": {
+    "learning_rate": 0.1,
+    "max_leaf_nodes": 127
+  },
+  "teste": {
+    "R2 (log)": 0.9766,
+    "MAE (US$)": 9.4017,
+    "MdAPE (%)": 15.6227,
+    "MAPE (%)": 23.0384,
+    "dentro ±10% (%)": 34.505,
+    "dentro ±25% (%)": 68.0781
+  },
+  "faixa_alerta_95": [
+    0.537,
+    1.992
+  ],
+  "linhas": {
+    "treino_final": 246006,
+    "teste": 117728
+  }
+}
+exit=0

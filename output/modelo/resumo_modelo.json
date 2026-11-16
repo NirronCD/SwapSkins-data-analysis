@@ -1,0 +1,24 @@
+{
+  "modelo_escolhido": "HistGradientBoosting",
+  "conjunto": "B: atributos + referência da skin",
+  "hiperparametros": {
+    "learning_rate": 0.1,
+    "max_leaf_nodes": 127
+  },
+  "teste": {
+    "R2 (log)": 0.9766,
+    "MAE (US$)": 9.4017,
+    "MdAPE (%)": 15.6227,
+    "MAPE (%)": 23.0384,
+    "dentro ±10% (%)": 34.505,
+    "dentro ±25% (%)": 68.0781
+  },
+  "faixa_alerta_95": [
+    0.537,
+    1.992
+  ],
+  "linhas": {
+    "treino_final": 246006,
+    "teste": 117728
+  }
+}
